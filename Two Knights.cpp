@@ -25,37 +25,7 @@ const ll N = 1005;
 
 int main(){
  
-    ll t;
-    cin >> t;
+    ll n;
+    cin >> n;
 
-    while(t--){
-        ll row,col;
-        cin >> row >> col;
-
-        ll num,ans;
-
-        if(row>=col){
-            if(row%2==0){
-                num = row * row;
-                ans = num - col + 1;
-            }
-            else {
-                num = 1 + (row-1)*(row-1);
-                ans = num + col -1;
-            }
-        }
-        else {
-            if(col%2){
-                num = col*col;
-                ans = num -row + 1;
-            }
-            else {
-                num = 1 + (col-1)*(col-1);
-                ans = num + row-1;
-            }
-        }
-
-        cout << ans << endl;
-        
-    }
 }
