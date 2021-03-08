@@ -18,17 +18,16 @@ const ll mxN = 2e5;
 const ll mod = 1e9 + 7;
 const ll N = 1005;
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
-
+ 
 int main(){
  
     ll n;
     cin >> n;
-
+ 
     ll five =0;
     
     for(int i=5;n/i >=1;i*=5)
         five += n/i;
-
+ 
     cout << five << endl;
-
-}
+ 
