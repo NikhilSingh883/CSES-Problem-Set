@@ -17,31 +17,35 @@ using namespace std;
 const ll mxN = 2e5;
 const ll mod = 1e9 + 7;
 const ll N = 1005;
-#define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
+#define rep(x,start,end) for(ll x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
 
 
 int main(){
- 
+    
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     ll n;
     cin >> n;
 
     vl a(n);
     rep(i,0,n) cin >> a[i];
-    ll tot =0;
+
+    ll tot = 0;
 
     rep(i,0,n) tot += a[i];
 
-    ll ans=LLONG_MAX;
+    ll ans = INT_MAX;
 
-    for(int i=0;i<(1<<n);i++){
+    for(ll i=0;i< 1<<n;i++){
         ll sum =0;
-        for(int j=0;j<n;j++)
-            if(1<<j & i) sum += a[i];
+        for(ll j=0;j<n;j++)
+            if(i & 1<<j ) sum += a[j];
 
-        ll t = abs(abs(tot-sum)-sum);
+        ll t = abs(tot-2*sum);
         ans = min(ans,t);
     }
 
-	cout << ans << endl;
-
+	cout << ans ;
+    return 0;
 }
