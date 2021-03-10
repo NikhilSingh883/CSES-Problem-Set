@@ -28,7 +28,8 @@ int main(){
     rep(i,0,n) cin >> a[i];
     rep(i,0,m) cin >> b[i];
 
-    sort(all(b));sort(all(a));
+    sort(all(b));
+    sort(all(a));
 
     ll ans =0;
     ll j=0,i=0;
