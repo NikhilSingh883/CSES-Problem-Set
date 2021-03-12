@@ -9,7 +9,6 @@ using namespace std;
 #define f first
 #define s second
 #define pll pair<ll, ll>
-#define vpl vector<pll>
 #define v(x) vector<x>
 #define mp make_pair
 const ll mod = 1e9 + 7;
