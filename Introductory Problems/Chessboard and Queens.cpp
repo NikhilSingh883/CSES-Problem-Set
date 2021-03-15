@@ -20,13 +20,13 @@ const ll N = 8;
 
 bool isValid(ll r, ll c,v(string) &s){
         for(ll i=r;i>=0;i--)
-            if(s[i][c]=='*')
+            if(s[i][c]=='Q')
                 return false;
         for(ll i=r,j=c;i>=0 && j>=0;i--,j--)
-            if(s[i][j]=='*')
+            if(s[i][j]=='Q')
                 return false;
         for(ll i=r,j=c;i>=0 && j<N;i--,j++)
-            if(s[i][j]=='*')
+            if(s[i][j]=='Q')
                 return false;
         return true;
 }
@@ -38,8 +38,8 @@ void Queens(v(string) &CB,ll row){
     }
 
     for(int i=0;i<N;i++)
-        if(isValid(row,i,CB)){
-            CB[row][i] = '*';
+        if(CB[row][i] =='.' && isValid(row,i,CB) ){
+            CB[row][i] = 'Q';
             Queens(CB,row+1);
             CB[row][i] = '.';
         } 

@@ -18,61 +18,30 @@ const ll mxN = 2e5;
 const ll mod = 1e9 + 7;
 const ll N = 1005;
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
+string mat[1001];
+int dx[4] ={1,-1,0,0};
+int dy[4] ={0,0,1,-1};
+ll n,m;
 
-v(ll) calculateZ(string input){
-    ll n = input.size();
+void dfs(int row,int col){
+    if(row<0 || col < 0 || row >=n || col >=m || mat[row][col]=='#')
+        return;
 
-    v(ll) Z(n);
-    ll left=0,right=0;
-
-    rep(k,0,n){
-        if(k>right){
-            left = right = k;
-
-            while(right < n && input[right] == input[right-left])
-                right++;
-            Z[k] = right - left;
-            right--;
-        }
-        else {
-            ll k1 = k- left;
-            if(Z[k1] < right - k + 1)
-                Z[k1] = Z[k];
-            else{
-                left = k;
-
-                while(right < n && input[right] == input[right-left])
-                    right++;
-                Z[k] = right - left;
-                right--;
-            }
-        }
-    }
-
-    return Z;
-}
-
-v(ll) patternmatch(string text,string pattern){
-    string newString = pattern;
-    newString += '$';
-    newString += text;
-
-    v(ll) Z = calculateZ(newString);
-
-    v(ll) res;
-
-    rep(k,0,newString.size())
-        if(Z[k] == pattern.size())
-            res.pb(k-pattern.size()-1);
-
-    return res;
+    mat[row][col] = '#';
+    rep(i,0,4)
+        dfs(row+dx[i],col+dy[i]);
 }
 
 int main(){
-    string text,pat;
-    cin >> text >> pat;
 
-    v(ll) Z = patternmatch(text,pat);
+    cin >> n >> m;
 
-    cout << Z.size() << endl;
+    rep(i,0,n) cin >> mat[i];
+
+    int ans =0;
+
+    rep(i,0,n) rep(j,0,m) if(mat[i][j] == '.'){ dfs(i,j); ans++; }
+
+
+    cout << ans << endl;
 }
