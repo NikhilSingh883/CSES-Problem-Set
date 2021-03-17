@@ -35,10 +35,8 @@ int main(){
     ll ans = 1;
 
     rep(i,0,n){
-        if(ans < a[i]){
+        if(ans < a[i])
             break;
-        }
-
         ans += a[i];
     }
 
