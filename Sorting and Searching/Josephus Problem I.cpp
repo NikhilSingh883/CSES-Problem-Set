@@ -27,6 +27,7 @@ bool cmp(pll a,pll b){
 int main(){   
 
     FAST;
+	
     ll n; cin>>n;
     ll a = 1, b = 0;
     
