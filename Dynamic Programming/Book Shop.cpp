@@ -37,7 +37,7 @@ int main(){
 
     ll n,X;
     cin >>n >> X;
-
+  
     v(ll) pri(n),pag(n);
 
     rep(i,0,n) cin >> pri[i];
