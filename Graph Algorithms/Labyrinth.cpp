@@ -1,83 +1,76 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
+
 using namespace std;
-#define ll long long int
-#define pb push_back
-#define rsz resize
-#define endl '\n'
-#define all(x) begin(x), end(x)
-#define sz(x) (ll)(x).size()
-#define pi  pair<int,int>
+
+#define ii pair<int, int>
 #define f first
 #define s second
-#define p(x) pair<x, x>
-#define vpl vector<pll>
-#define v(x) vector<x>
-#define s(x) set<x>
 #define mp make_pair
-const ll mxN = 2e5;
-const ll mod = 1e9 + 7;
-const ll N = 1005;
-#define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
-string mat[1001];
 
-int dx[4] ={1,-1,0,0};
-int dy[4] ={0,0,1,-1};
-ll n,m;
+int n, m;
+char A[1000][1000];
+bool vis[1000][1000];
 
-char addOn(ll idx){
-    switch (idx)
-    {
-    case 0:
-        return 'D';
-    case 1:
-        return 'U';
-    case 2:
-        return 'R';
-    case 3:
-        return 'L';
-    }
-}
+// previousStep stores the previous direction that we moved in to arrive that this cell
+int previousStep[1000][1000];
 
-int main(){
+// 0 = up, 1 = right, 2 = down, 3 = left
+int dx[4] = { -1, 0, 1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
+string stepDir = "URDL";
 
-    cin >> n >> m;
+int main() {
+	cin >> n >> m;
 
-    rep(i,0,n) cin >> mat[i];
+	queue<ii> q;
+	ii begin, end;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> A[i][j];
+			if (A[i][j] == 'A') {
+				begin = mp(i, j);
+			} else if (A[i][j] == 'B') {
+				end = mp(i, j);
+			}
+		}
+	}
 
-    queue<pair<pair<ll,ll>,string>> Q;
+	q.push(begin);
+	vis[begin.f][begin.s] = true;
 
-    string path="";
-    rep(i,0,n) rep(j,0,m) if(mat[i][j] == 'A') { Q.push({{i,j},""});}
+	while (!q.empty()) {
+		ii u = q.front(); q.pop();
+		for (int i = 0; i < 4; i++) {
+			ii v = mp(u.f + dx[i], u.s + dy[i]);
+			if (v.f < 0 || v.f >= n || v.s < 0 || v.s >= m) continue;
+			if (A[v.f][v.s] == '#') continue;
+			if (vis[v.f][v.s]) continue;
+			vis[v.f][v.s] = true;
+			previousStep[v.f][v.s] = i;
+			q.push(v);
+		}
+	}
 
+	if (vis[end.f][end.s]) {
+		cout << "YES" << endl;
+		vector<int> steps;
+		while (end != begin) {
+			int p = previousStep[end.f][end.s];
+			steps.push_back(p);
+			// undo the previous step to get back to the previous square
+			// Notice how we subtract dx/dy, whereas we added dx/dy before
+			end = mp(end.f - dx[p], end.s - dy[p]);
+		}
+		reverse(steps.begin(), steps.end());
 
-    while(!Q.empty()){
-        pair<pair<ll,ll>,string> top = Q.front();
-        Q.pop();
+		cout << steps.size() << endl;
+		for (char c : steps) {
+			cout << stepDir[c];
+		}
+		cout << endl;
+	} else {
+		cout << "NO" << endl;
+	}
 
-        ll row = top.first.first;
-        ll col = top.first.second;
-        string ans = top.second;
-
-        if(row<0 || col <0 || row >=n || col >=m || mat[row][col] == '#') continue;
-
-
-        if(mat[row][col] =='B'){
-            path = ans;
-            break;
-        }
-
-        mat[row][col] = '#';
-
-        rep(i,0,4)
-            Q.push({{row+dx[i],col+dy[i]},ans + addOn(i)});
-
-    }
-
-    if(path.size()){
-        cout <<"YES"<<endl;
-        cout << path.size() << endl;
-        cout << path << endl;
-    }
-    else cout << "NO" << endl;
-    
+	return 0;
 }
