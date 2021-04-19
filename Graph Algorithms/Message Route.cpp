@@ -73,6 +73,5 @@ int main(){
 
     if(poss)
         rep(i,1,n+1) cout << 1 + color[i] <<" ";
-
     else cout << "IMPOSSIBLE";
 }
