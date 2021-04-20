@@ -47,7 +47,7 @@ bool bellman_ford(ll n,ll m){
 
     dist[1] = 0;
 
-    rep(i,0,n)
+    rep(i,0,n-1)
         rep(j,0,m){
             u = ee[j].from;
             v = ee[j].to;
