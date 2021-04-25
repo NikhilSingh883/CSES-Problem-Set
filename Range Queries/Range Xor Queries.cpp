@@ -29,17 +29,17 @@ void update(ll idx,ll val,ll n){
     }
 }
 
-ll prefixSum(ll idx){
-    ll sum =0;
+ll prefixXor(ll idx){
+    ll _xor =0;
     while(idx>0){
-        sum ^= seg[idx];
+        _xor ^= seg[idx];
         idx -= idx &(-idx);
     }
-    return sum;
+    return _xor;
 }
 
 ll query(ll l,ll r){
-    return prefixSum(r) ^ prefixSum(l-1);
+    return prefixXor(r) ^ prefixXor(l-1);
 }
 
 int main(){
