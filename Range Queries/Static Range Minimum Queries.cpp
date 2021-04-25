@@ -20,44 +20,44 @@ const ll oo = 1e15;
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
 #define repf(x,start,end,k) for(auto x = start;x<=end;x+=k)
 #define repb(x,start,end,k) for(auto x = start;x>=end;x-=k)
-
+ 
 ll arr[N],seg[4*N];
 void build(ll node,ll st,ll en){
     if(st == en){
         seg[node] = arr[st];
         return;
     }
-
+ 
     ll mid = (st+en)/2;
     build(2*node,st,mid);
     build(2*node+1,mid+1,en);
-
+ 
     seg[node] = min(seg[2*node],seg[2*node+1]);
 }
-
+ 
 ll query(ll node,ll st,ll en,ll l,ll r){
     if(l > en || r < st) return INT_MAX;
-
+ 
     if(l<=st && r >=en) return seg[node];
-
+ 
     ll mid = (st+en)/2;
     return min(query(2*node,st,mid,l,r),query(2*node+1,mid+1,en,l,r));
 }
-
+ 
 int main(){
     FAST;
-
-    ll n,q,l,r;
+ 
+    ll n,q,x,l,r;
     cin >> n >> q;
-
+ 
     rep(i,1,n+1)
         cin >> arr[i];
-
+ 
     build(1,1,n);
-
+ 
     while(q--){
         cin >> l >> r;
         cout << query(1,1,n,l,r) << endl;
     }
-
+ 
 }
