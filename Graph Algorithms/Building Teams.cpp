@@ -19,61 +19,59 @@ const ll N = 6;
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
 #define repf(x,start,end,k) for(auto x = start;x<=end;x+=k)
 #define repb(x,start,end,k) for(auto x = start;x>=end;x-=k)
- 
+
 v(ll) g[mxN];
 ll prevNode[mxN];
 ll vis[mxN];
- 
-int main(){
-    FAST;
- 
-    ll n,m;
-    cin >> n >>m;
- 
-    rep(i,0,m){
-        ll u,v;
-        cin >> u >> v;
- 
-        g[u].pb(v);
-        g[v].pb(u);
-    }
- 
+v(ll) color(mxN,-1);
+
+bool bfs(ll root){
+
     queue<ll> Q;
-    Q.push(1);
- 
-    prevNode[1] = -1;
- 
+    Q.push(root);
+    bool poss = true;
+    color[root] = 1;
+
+
     while(!Q.empty()){
         ll top = Q.front();
         Q.pop();
- 
-        if(top == n) break;
- 
+
         for(auto v:g[top]){
-            if(!prevNode[v]){
-                prevNode[v] = top;
+
+            if(color[v] == -1){
+                color[v] = 1 - color[top];
                 Q.push(v);
+            }
+            else if(color[v] == color[top]){
+                return false;
             }
         }
     }
- 
-    if(prevNode[n]){
-        stack<ll> s;
-        s.push(n);
- 
-        ll p = prevNode[n];
- 
-        while(p!=-1){
-            s.push(p);
-            p = prevNode[p];
-        }
- 
-        cout << s.size() << endl;
- 
-        while(!s.empty()){
-            cout << s.top() << " ";
-            s.pop();
-        }
+
+    return true;
+}
+
+int main(){
+    FAST;
+
+    ll n,m;
+    cin >> n >>m;
+
+    rep(i,0,m){
+        ll u,v;
+        cin >> u >> v;
+
+        g[u].pb(v);
+        g[v].pb(u);
     }
+    bool poss = true;
+
+    rep(i,1,n+1)
+        if(color[i] == -1)
+            poss = poss && bfs(i);
+
+    if(poss)
+        rep(i,1,n+1) cout << 1 + color[i] <<" ";
     else cout << "IMPOSSIBLE";
 }

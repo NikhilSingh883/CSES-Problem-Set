@@ -47,7 +47,7 @@ int main() {
     ll n;
     cin >>n;
 
-    cout << fac[2*n]%mod *inv[n]%mod*inv[n]%mod*expo(2,mod-2,mod)%mod*expo(n+1,mod-2,mod)%mod;
+    cout << fac[2*n]%mod*inv[n]%mod*inv[n+1]%mod*expo(2,mod-2,mod)%mod;
 
 	return 0;
 }

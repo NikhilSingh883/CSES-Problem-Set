@@ -68,7 +68,6 @@ int main(){
 
         cin >> u >> v >> c; 
         g[u].pb({v,c});
-        // g[v].pb({u,c});
     }
     dijkstra();
     rep(i,1,n+1) cout << dist[i] <<" ";

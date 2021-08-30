@@ -1,31 +1,31 @@
-#include <bits/stdc++.h> 
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
-using namespace std;
-#define ll long long int
-#define pb push_back
-#define rsz resize
-#define endl '\n'
-#define all(x) begin(x), end(x)
-#define sz(x) (ll)(x).size()
-#define pi  pair<int,int>
-#define f first
-#define s second
-#define pll pair<ll, ll>
-#define vpl vector<pll>
-#define vl vector<ll>
-#define vll vector<ll, ll>
-#define mp make_pair
-typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> indexed_set;
-const ll mxN = 2e5;
-const ll mod = 1e9 + 7;
-const ll N = 1005;
-#define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x-=-))
-
-
-int main(){
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization("unroll-loops")
  
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+#define F first
+#define S second
+#define PB push_back
+#define MP make_pair
+#define mod 1000000007
+#define rep(i, n) for(ll i = 0;i<n;++i)
+#define repf(i,k,n) for (ll i = k; i <= n; ++i) 
+#define repr(i,k,n) for (ll i = k; i >= n; --i) 
+#define test() ll cases; cin>>cases; while(cases--)
+ 
+ 
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     ll n;
-    cin >> n;
-
-}
+    cin>>n;
+    repf(i,1,n)
+    cout<<((i*i*i*i)-(i*i))/2 - 4*(i-1)*(i-2)<<"\n";
+    
+        
+    }

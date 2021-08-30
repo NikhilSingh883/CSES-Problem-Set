@@ -20,7 +20,6 @@ const ll N = 6;
 #define repf(x,start,end,k) for(auto x = start;x<=end;x+=k)
 #define repb(x,start,end,k) for(auto x = start;x>=end;x-=k)
 
-int remGame(bool turn,v(ll) )
 
 int main(){
     FAST;
@@ -41,7 +40,7 @@ int main(){
     rep(i,1,n+1)
         rep(j,1,sum+1){
             if(j < coins[i-1]) dp[i][j] = dp[i-1][j];
-            if(j >= coins[i-1]) dp[i][j] = dp[i-1][j] || dp[i-1][j-coins[i-1]];
+            else dp[i][j] = dp[i-1][j] || dp[i-1][j-coins[i-1]];
         }
     v(ll) ans;
     rep(i,1,sum+1) if(dp[n][i]) ans.pb(i);

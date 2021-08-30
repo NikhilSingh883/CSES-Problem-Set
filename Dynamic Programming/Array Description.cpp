@@ -23,16 +23,16 @@ int fun(vector<int>& v,int n,int m)
             if(i == 1)
             {
                 if(v[i]==0 || v[i]==j)
-                dp[i][j] = 1;
+                    dp[i][j] = 1;
                 else
-                dp[i][j] = 0;
+                    dp[i][j] = 0;
             }
             else
             {
                 if(v[i]==0 || v[i]==j)
-                dp[i][j] = ((dp[i-1][j-1] + dp[i-1][j])%mod + dp[i-1][j+1])%mod;
+                    dp[i][j] = ((dp[i-1][j-1] + dp[i-1][j])%mod + dp[i-1][j+1])%mod;
                 else
-                dp[i][j] = 0;
+                    dp[i][j] = 0;
             }
         }
     }

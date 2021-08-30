@@ -21,14 +21,19 @@ const ll N = 6;
 #define repb(x,start,end,k) for(auto x = start;x>=end;x-=k)
 map<string,ll> dp;
 
-ll remGame(bool turn,v(ll) val,ll st,ll en){
-    if(st>en) return 0;
-
-    string key = to_string(st) +" "+ to_string(en) +" "+ to_string(turn);
-    if(dp.find(key)!=dp.end()) return dp[key];
-
-    if(turn) return dp[key] = max(val[st] + remGame(!turn,val,st+1,en),val[en] + remGame(!turn,val,st,en-1));
-    else return dp[key] = min(val[st] + remGame(!turn,val,st+1,en),val[en] + remGame(!turn,val,st,en-1));
+ll func(ll i, ll j, vector<vector<ll>> &dp, v(ll) &a){
+    if(i>j)
+        return 0;
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+    return dp[i][j]=max(
+        a[i]+min(func(i+2,j,dp,a),
+                    func(i+1,j-1,dp,a)
+                ),
+        a[j]+min(func(i,j-2,dp,a),
+                    func(i+1,j-1,dp,a)
+                )
+    );
 }
 
 int main(){
@@ -39,8 +44,8 @@ int main(){
 
     v(ll) coins(n);
     rep(i,0,n) cin >> coins[i];
+    vector<vector<ll>> dp(n, vector<ll>(n,-1)); 
 
-
-    cout << remGame(true,coins,0,n-1);
+    cout << func(0,n-1,dp,coins);
 
 }

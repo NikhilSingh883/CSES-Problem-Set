@@ -25,11 +25,11 @@ ll minCoins(v(ll) coins,ll sum,ll n){
     v(ll) dp(sum+1,0);
     dp[0] = 1;
 
-        for (auto c : coins) 
-            for(int i=c;i<=sum;i++){
-                    dp[i] += dp[i-c];
-                    dp[i]%=mod;
-        }
+    for (auto c : coins) 
+        for(int i=c;i<=sum;i++){
+                dp[i] += dp[i-c];
+                dp[i]%=mod;
+    }
     return dp[sum];
 }
  
